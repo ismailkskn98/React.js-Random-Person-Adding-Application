@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Person } from '../../types/types';
 
-const BASE_URL: string = 'http://localhost:8000';
+// react-js-random-person-adding-application.vercel.app
+const BASE_URL: string = 'react-js-random-person-adding-application.vercel.app';
 
 const delayFetch = (delay: number) => {
   return new Promise((resolve) => setTimeout(resolve, delay));

@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://localhost:{{port}}/:path*"
+      "destination": "https://react-js-random-person-adding-application.vercel.app/api/:path*"
     }
   ]
 }
