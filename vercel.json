@@ -1,18 +1,9 @@
 {
-  "version": 2,
-  "builds": [
+  "framework": "reactjs",
+  "rewrites": [
     {
-      "src": "server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["db/db.json"]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "source": "/api/:path*",
+      "destination": "http://localhost:{{port}}/:path*"
     }
   ]
 }
