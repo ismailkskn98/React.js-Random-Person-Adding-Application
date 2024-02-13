@@ -1,16 +1,15 @@
 import { FC, ReactNode } from 'react';
-import { useGetPersonsQuery } from '../reducer/services/personsApi';
+import { useGetPersonsQuery } from '../../reducer/services/personsApi';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import PersonListItem from './PersonListItem';
-import { Person } from '../types/types';
+import { Person } from '../../types/types';
 
 const PersonList: FC = () => {
   const { data, isFetching, isError } = useGetPersonsQuery();
   // console.log(data);
 
   let content: ReactNode | Element[] | undefined;
-  console.log(data);
 
   if (isFetching) {
     content = (
@@ -32,7 +31,7 @@ const PersonList: FC = () => {
 
   return (
     <>
-      <div className="persons-wrapper flex flex-col items-center gap-5">{content}</div>
+      <main className=" flex flex-col items-center gap-5">{content}</main>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import PersonList from './components/PersonList';
-import Header from './components/Header';
+import PersonList from './components/Person';
+import Header from './components/common/Header';
 
 const App: FC = () => {
   return (
