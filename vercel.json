@@ -1,5 +1,4 @@
 {
-  "framework": "reactjs",
   "rewrites": [
     {
       "source": "/api/:path*",
