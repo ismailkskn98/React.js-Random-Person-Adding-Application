@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Person } from '../../types/types';
 import PanelAlbumTitle from '../openablePanel/PanelAlbumTitle';
 import OpenablePanel from '../openablePanel';
-import PanelHeader from '../common/panelHeader';
+import PanelHeader from '../common/PanelHeader';
 import PanelAlbums from '../openablePanel/PanelAlbums';
 import { useRemovePersonMutation } from '../../reducer/services/personsApi';
 
