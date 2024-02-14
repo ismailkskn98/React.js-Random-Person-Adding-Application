@@ -2,26 +2,25 @@ import { FC } from 'react';
 import { Person } from '../../types/types';
 import { MdDelete } from 'react-icons/md';
 import { FaChevronLeft } from 'react-icons/fa';
-import { useRemovePersonMutation } from '../../reducer/services/personsApi';
 import { CircleLoader } from 'react-spinners';
 
-type PersonListItemTitleProps = {
+type PanelHeaderProps = {
   item: Person;
   handlePanel: () => void;
   arrow: boolean;
+  isLoading: boolean;
+  handleRemove: () => void;
 };
 
-const PersonListItemTitle: FC<PersonListItemTitleProps> = ({ item, handlePanel, arrow }) => {
-  const [removePerson, result] = useRemovePersonMutation();
-
+const PanelHeader: FC<PanelHeaderProps> = ({ item, handlePanel, arrow, handleRemove, isLoading }) => {
   return (
     <>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-3">
-          {result.isLoading ? (
+          {isLoading ? (
             <CircleLoader color="#fff" size={25} />
           ) : (
-            <MdDelete onClick={() => removePerson(item)} className="text-2xl hover:text-gray-400 cursor-pointer" />
+            <MdDelete onClick={handleRemove} className="text-2xl hover:text-gray-400 cursor-pointer" />
           )}
           <span className="capitalize">{item.name}</span>
         </div>
@@ -37,4 +36,4 @@ const PersonListItemTitle: FC<PersonListItemTitleProps> = ({ item, handlePanel, 
   );
 };
 
-export default PersonListItemTitle;
+export default PanelHeader;

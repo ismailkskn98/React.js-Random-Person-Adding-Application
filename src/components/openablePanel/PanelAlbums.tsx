@@ -1,6 +1,15 @@
 import { FC } from 'react';
+import { useFetchAlbumsQuery } from '../../reducer/services/albumsApi';
+import { Person } from '../../types/types';
 
-const PanelAlbums: FC = () => {
+type PanelAlbumsProps = {
+  person: Person;
+};
+
+const PanelAlbums: FC<PanelAlbumsProps> = ({ person }) => {
+  const data = useFetchAlbumsQuery(person);
+  console.log(data);
+
   return <div>PanelAlbums</div>;
 };
 

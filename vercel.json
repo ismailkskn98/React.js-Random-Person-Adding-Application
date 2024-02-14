@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://react-js-random-person-adding-application.vercel.app/api/:path*"
-    }
-  ]
-}

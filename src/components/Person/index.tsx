@@ -7,10 +7,8 @@ import { Person } from '../../types/types';
 
 const PersonList: FC = () => {
   const { data, isFetching, isError } = useGetPersonsQuery();
-  // console.log(data);
 
   let content: ReactNode | Element[] | undefined;
-
   if (isFetching) {
     content = (
       <SkeletonTheme baseColor="#d1d1d1" highlightColor="#aba8a8">
@@ -20,18 +18,14 @@ const PersonList: FC = () => {
       </SkeletonTheme>
     );
   } else if (isError) {
-    content = (
-      <>
-        <h1>Hata Var !</h1>
-      </>
-    );
+    content = <h1>Hata Var !</h1>;
   } else {
     content = data?.map((item: Person) => <PersonListItem item={item} key={item.id} />);
   }
 
   return (
     <>
-      <main className=" flex flex-col items-center gap-5">{content}</main>
+      <main className="flex flex-col items-center gap-5">{content}</main>
     </>
   );
 };

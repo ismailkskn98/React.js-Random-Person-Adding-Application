@@ -1,24 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { personsApi } from '../services/personsApi';
+import { albumsApi } from '../services/albumsApi';
 
 // configureStore: Redux store'unu yapılandırmak için kullanılır.
 export const store = configureStore({
   reducer: {
     // kare parantez içinde bir ifade kullanarak dinamik olarak bir anahtar belirleyebilirsiniz.
     [personsApi.reducerPath]: personsApi.reducer, // reducer : (state, action) => {…}
+    [albumsApi.reducerPath]: albumsApi.reducer,
   },
-  // personsApi.reducerPath: RTK Query'nin reducer'ının kaydedileceği yerdir.
-  // personsApi.reducer: RTK Query tarafından oluşturulan reducer'ı store'a ekler.
   // personsApi.middleware: RTK Query tarafından oluşturulan middleware'i store'a ekler.
-
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(personsApi.middleware),
-  // personsApi.middleware:  RTK Query tarafından otomatik olarak oluşturulur ve redux store'a eklenir. Bu middleware, API isteklerini kontrol etmek ve işlemek için kullanılır. Biz configureStore fonksiyonunda, oluşturduğumuz redux store'a bu middleware'i ekliyoruz ki, RTK Query tarafından yapılan API istekleri doğrudan redux store'a entegre edilsin ve orada yönetilsin.
+  //! // Api ara yazılımının eklenmesi önbelleğe alma, geçersiz kılma ve yoklamayı mümkün kılar,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(personsApi.middleware).concat(albumsApi.middleware),
 });
 
 // setupListeners(store.dispatch): RTK Query'nin özel listener'larını kurar. Bu, async action'ların redux store'a otomatik olarak dispatch edilmesini sağlar.
+// isteğe bağlıdır, ancak refetchOnFocus/refetchOnReconnect davranışları için gereklidir
+// see `setupListeners` docs - özelleştirme için 2. arg olarak isteğe bağlı bir geri arama alır
 setupListeners(store.dispatch);
-
-//? middleware
-//* Middleware, bir işlemin (örneğin bir HTTP isteğinin veya bir eylemin) başlaması ve tamamlanması arasında çalışan fonksiyonlardır.
-//* Özetle, middleware terimi, bir yazılım uygulamasında bir işlemin başlaması ve tamamlanması arasında çalışan ve işlemin davranışını değiştiren veya genişleten ara katman işlevlerini ifade eder. Bu, işlemleri işleme, izleme, güncelleme veya değiştirme gibi çeşitli amaçlar için kullanılabilir.
