@@ -1,7 +1,6 @@
 import { Album, Person } from './../../types/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL, delayFetch } from './personsApi';
-import { faker } from '@faker-js/faker';
 
 export const albumsApi = createApi({
   reducerPath: 'albums',
@@ -36,28 +35,29 @@ export const albumsApi = createApi({
     }),
     // add
     addAlbum: builder.mutation<void, Partial<Album>>({
-      invalidatesTags: (result, error, person) => {
+      invalidatesTags: (result, error, album) => {
         // result => işlem doğru bir şekilde tamamlanırda bize gelen data
         // error => eğer hata var ise hata mesajı
         // person => gelen parametre
         return [
           {
+            // yeni bir albüm eklediğimizde bu kişiye ait albüm koleksiyonunun güncellenmesi gerektiğini belirtmiş oluruz.
+            /*
+            Albüm eklemesi yapıldığında, invalidatesTags fonksiyonu album.personId kullanarak, bu albümün ait olduğu kişiye ait albüm koleksiyonunu temsil eden etiketi belirler. Dolayısıyla, yeni eklenen albüm, ilgili kişiye ait albüm koleksiyonunu günceller ve bu koleksiyonla ilgili önbellekleri temizler. Bu şekilde, type: 'PersonAlbums' etiketi, albüm eklemesi sonrasında güncellenen veriyi temsil eder.
+            */
             type: 'PersonAlbums',
-            id: person.id,
+            id: album.personId,
           },
         ];
       },
-      query: (person: Person) => ({
+      query: (album: Album) => ({
         url: '/albums',
         method: 'POST',
-        body: {
-          personId: person.id,
-          title: faker.commerce.productName(),
-        },
+        body: album,
       }),
     }),
     // remove
-    removeAlbum: builder.mutation<void, Partial<Album>>({
+    removeAlbum: builder.mutation<void, Album>({
       invalidatesTags: (result, error, album) => {
         return [{ type: 'Album', id: album.id }];
       },
