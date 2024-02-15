@@ -4,6 +4,7 @@ import { Album } from '../../types/types';
 import { useRemoveAlbumMutation } from '../../reducer/services/albumsApi';
 import OpenablePhotoPanel from '../openablePhotoPanel';
 import PanelPhotoTitle from '../openablePhotoPanel/PanelPhotoTitle';
+import PanelPhotos from '../openablePhotoPanel/PanelPhotos';
 
 type PanelAlbumItemProps = {
   album: Album;
@@ -27,7 +28,8 @@ const PanelAlbumItem: FC<PanelAlbumItemProps> = ({ album }) => {
       />
       {arrow && (
         <OpenablePhotoPanel>
-          <PanelPhotoTitle title={album.title} />
+          <PanelPhotoTitle title={album.title} albumId={album.id} />
+          <PanelPhotos album={album} />
         </OpenablePhotoPanel>
       )}
     </article>

@@ -1,16 +1,28 @@
 import { FC } from 'react';
-// import Button from '../common/Button';
+import Button from '../common/Button';
+import { useAddPhotoMutation } from '../../reducer/services/photoApi';
+import { faker } from '@faker-js/faker';
 
 type PanelPhotoTitleProps = {
   title: string;
+  albumId: string | number;
 };
 
-const PanelPhotoTitle: FC<PanelPhotoTitleProps> = ({ title }) => {
+const PanelPhotoTitle: FC<PanelPhotoTitleProps> = ({ title, albumId }) => {
+  const [addPhoto, result] = useAddPhotoMutation();
+
+  const handleAddPhoto = () => {
+    addPhoto({
+      albumId: albumId,
+      img: faker.image.urlPicsumPhotos({ width: 208, height: 208 }),
+    });
+  };
+
   return (
     <div id="person-panel">
       <title className="text-white flex items-center justify-between mb-4">
         <h1 className="text-xl">{title} Fotorafları</h1>
-        {/* <Button title="Albüm Ekle" handleClick={handleAddAlbum} isLoading={result.isLoading} /> */}
+        <Button title="Fotoraf Ekle" handleClick={handleAddPhoto} isLoading={result.isLoading} />
       </title>
       <hr className="h-px bg-gray-200 border-0 dark:bg-gray-600" />
     </div>
