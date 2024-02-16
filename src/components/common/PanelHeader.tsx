@@ -19,9 +19,9 @@ const PanelHeader: FC<PanelHeaderProps> = ({ title, handlePanelToggle, arrow, ha
           {isLoading ? (
             <CircleLoader color="#fff" size={25} />
           ) : (
-            <MdDelete onClick={handleRemove} className="text-2xl hover:text-gray-400 cursor-pointer" />
+            <MdDelete onClick={handleRemove} className="text-2xl hover:text-red-900 cursor-pointer text-red-500" />
           )}
-          <span className="capitalize text-lg">{title}</span>
+          <span className="capitalize text-xl">{title}</span>
         </div>
         <span onClick={handlePanelToggle} className="font-semibold text-md cursor-pointer group">
           <FaChevronLeft

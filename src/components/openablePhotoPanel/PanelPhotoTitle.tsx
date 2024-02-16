@@ -21,8 +21,8 @@ const PanelPhotoTitle: FC<PanelPhotoTitleProps> = ({ title, albumId }) => {
   return (
     <div id="person-panel">
       <title className="text-white flex items-center justify-between mb-4">
-        <h1 className="text-xl">{title} Fotorafları</h1>
-        <Button title="Fotoraf Ekle" handleClick={handleAddPhoto} isLoading={result.isLoading} />
+        <h1 className="text-lg text-gray-400">{title} Fotoğrafları</h1>
+        <Button title="Fotoğraf Ekle" handleClick={handleAddPhoto} isLoading={result.isLoading} />
       </title>
       <hr className="h-px bg-gray-200 border-0 dark:bg-gray-600" />
     </div>

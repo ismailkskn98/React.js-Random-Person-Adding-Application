@@ -15,9 +15,9 @@ const PanelPhotos: FC<PanelPhotosProps> = ({ album }) => {
   if (isFetching) {
     content = (
       <SkeletonTheme baseColor="#242e3c" highlightColor="#ffffff57">
-        <p className="w-full flex items-center justify-between">
-          <Skeleton count={4} className="mb-5 px-3 py-4" />
-        </p>
+        <div className="w-full">
+          <Skeleton containerClassName="flex gap-8 items-center justify-center" count={5} className="w-52 h-52" />
+        </div>
       </SkeletonTheme>
     );
   } else if (isError) {
